@@ -4,6 +4,7 @@ let ready = false;
 
 export function initAnalytics() {
   const key = import.meta.env.VITE_PUBLIC_POSTHOG_KEY;
+  console.log("PostHog Key Loaded:", !!key)
   if (!key || ready) return;
   posthog.init(key, {
     api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
