@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Cat, ChevronLeft, Cookie, Eye, Fish, Heart } from "lucide-react";
+import { trackFeedKibble } from "../lib/analytics.js";
 
 const INITIAL_LOGS = [
   "POs: ให้ขนม 1 ครั้ง",
@@ -33,6 +34,7 @@ export default function LiveFeedingPage({ station, kibbles, onBack, onSpend }) {
   const feed = (kind) => {
     if (!canFeed) return;
     onSpend?.(1);
+    if (kind === "kibble") trackFeedKibble(station?.id, kibbles - 1);
     spawnBurst(kind);
     setLogs((l) =>
       kind === "snack"
